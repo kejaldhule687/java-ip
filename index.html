@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GrandStay Hotel Management</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">🏨</div>
+
+            <div>
+                <h2>MAJESTIC INN</h2>
+                <span>HOTEL MANAGEMENT</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#dashboard" class="nav-link active">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#guests" class="nav-link">
+                <span>👥</span> Guests
+            </a>
+
+            <a href="#bookings" class="nav-link">
+                <span>🛏</span> Bookings
+            </a>
+
+            <a href="#billing" class="nav-link">
+                <span>₹</span> Billing
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Hotel Management System</p>
+            <small>Version 2.0</small>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <p class="welcome">Welcome back 👋</p>
+                <h1>Hotel Dashboard</h1>
+            </div>
+
+            <div class="admin">
+                <div class="admin-avatar">A</div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Hotel Manager</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+
+            <div class="stats">
+
+                <div class="stat-card blue">
+                    <div class="stat-icon">👥</div>
+
+                    <div>
+                        <p>Total Guests</p>
+                        <h2 id="totalGuests">0</h2>
+                    </div>
+                </div>
+
+
+                <div class="stat-card green">
+                    <div class="stat-icon">🛏</div>
+
+                    <div>
+                        <p>Occupied Rooms</p>
+                        <h2 id="occupiedRooms">0</h2>
+                    </div>
+                </div>
+
+
+                <div class="stat-card orange">
+                    <div class="stat-icon">🔑</div>
+
+                    <div>
+                        <p>Available Rooms</p>
+                        <h2 id="availableRooms">20</h2>
+                    </div>
+                </div>
+
+
+                <div class="stat-card purple">
+                    <div class="stat-icon">₹</div>
+
+                    <div>
+                        <p>Total Revenue</p>
+                        <h2 id="totalRevenue">₹0</h2>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GUEST FORM -->
+        <section class="card" id="guests">
+
+            <div class="section-header">
+
+                <div>
+                    <span class="section-label">MANAGEMENT</span>
+                    <h2>Guest Information</h2>
+                    <p>Add and manage hotel guest records</p>
+                </div>
+
+            </div>
+
+
+            <form id="guestForm">
+
+                <input type="hidden" id="editIndex" value="-1">
+
+                <div class="form-group">
+                    <label>Guest Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter guest name"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input
+                        type="text"
+                        id="phone"
+                        placeholder="Enter phone number"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input
+                        type="number"
+                        id="room"
+                        placeholder="101"
+                        min="1"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Room Type</label>
+
+                    <select id="type" required>
+
+                        <option value="">
+                            Select Room Type
+                        </option>
+
+                        <option value="Single">
+                            Single — ₹1,500/day
+                        </option>
+
+                        <option value="Double">
+                            Double — ₹2,500/day
+                        </option>
+
+                        <option value="Deluxe">
+                            Deluxe — ₹3,500/day
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Check-in Date</label>
+
+                    <input
+                        type="date"
+                        id="checkin"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Check-out Date</label>
+
+                    <input
+                        type="date"
+                        id="checkout"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Payment Status</label>
+
+                    <select id="payment" required>
+
+                        <option value="">
+                            Select Payment Status
+                        </option>
+
+                        <option value="Paid">
+                            Paid
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                        id="saveBtn"
+                    >
+                        <span>＋</span>
+                        Add Guest
+                    </button>
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        onclick="clearForm()"
+                    >
+                        Clear
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- GUEST RECORDS -->
+        <section class="card" id="bookings">
+
+            <div class="section-header records-header">
+
+                <div>
+                    <span class="section-label">RECORDS</span>
+
+                    <h2>Guest & Booking Records</h2>
+
+                    <p>
+                        Manage current hotel reservations
+                    </p>
+                </div>
+
+
+                <div class="search-box">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search guest..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Guest</th>
+                            <th>Phone</th>
+                            <th>Room</th>
+                            <th>Type</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Payment</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="guestTable"></tbody>
+
+                </table>
+
+
+                <div id="emptyMessage" class="empty-message">
+
+                    <div>🏨</div>
+
+                    <h3>No Guest Records</h3>
+
+                    <p>
+                        Add your first guest using the form above.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-footer">
+
+                <span>
+                    Showing <strong id="recordCount">0</strong> records
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- BILL -->
+        <section
+            class="card bill-card"
+            id="billing"
+            style="display:none;"
+        >
+
+            <div class="bill-top">
+
+                <div>
+
+                    <span class="section-label">
+                        INVOICE
+                    </span>
+
+                    <h2>Guest Bill</h2>
+
+                </div>
+
+                <div class="invoice-number">
+                    Invoice #<span id="billNumber"></span>
+                </div>
+
+            </div>
+
+
+            <div class="invoice">
+
+                <div class="invoice-header">
+
+                    <div>
+                        <h2>MAJESTIC INN</h2>
+                        <p>Hotel & Resort</p>
+                    </div>
+
+                    <div class="invoice-title">
+                        <strong>INVOICE</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="invoice-info">
+
+                    <div>
+                        <span>Guest Name</span>
+                        <strong id="billGuest"></strong>
+                    </div>
+
+                    <div>
+                        <span>Phone</span>
+                        <strong id="billPhone"></strong>
+                    </div>
+
+                    <div>
+                        <span>Room</span>
+                        <strong id="billRoom"></strong>
+                    </div>
+
+                    <div>
+                        <span>Stay</span>
+                        <strong id="billDates"></strong>
+                    </div>
+
+                </div>
+
+
+                <div class="invoice-table">
+
+                    <div class="invoice-row invoice-head">
+
+                        <span>Description</span>
+                        <span>Rate</span>
+                        <span>Days</span>
+                        <span>Total</span>
+
+                    </div>
+
+
+                    <div class="invoice-row">
+
+                        <span>Room Charges</span>
+
+                        <span id="billRate"></span>
+
+                        <span id="billDays"></span>
+
+                        <strong id="billTotal"></strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="invoice-summary">
+
+                    <div>
+                        Payment Status:
+                        <strong id="billPayment"></strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="bill-buttons">
+
+                <button
+                    class="primary-btn"
+                    onclick="printBill()"
+                >
+                    🖨 Print Bill
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="closeBill()"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
